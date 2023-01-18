@@ -3,7 +3,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {
-    const spreadSheetId = '1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM';
+    const spreadSheetId = '1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM'
 
     const doc = new GoogleSpreadsheet(spreadSheetId)
     await doc.useServiceAccountAuth({
@@ -11,7 +11,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       // eslint-disable-next-line n/prefer-global/process
       private_key: process.env.GOOGLE_PRIVATE_KEY,
-    });
+    })
     // await doc.useServiceAccountAuth(require('./your-service-account.json'))
     await doc.loadInfo()
     // eslint-disable-next-line prefer-destructuring
