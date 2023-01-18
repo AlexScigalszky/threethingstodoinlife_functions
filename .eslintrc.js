@@ -13,6 +13,8 @@ module.exports = {
         'no-magic-numbers': 'off',
         'promise/prefer-await-to-callbacks': 'off',
         'unicorn/filename-case': 'off',
+        'no-restricted-exports': 'off',
+        'arrow-body-style': 'off',
       },
     },
   ],

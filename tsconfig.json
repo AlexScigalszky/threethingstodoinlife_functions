@@ -15,7 +15,7 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "declaration": true,
-    "strict": true
+    "strict": false
   },
   "include": ["./netlify/**/*"],
   "exclude": ["./node_modules"]

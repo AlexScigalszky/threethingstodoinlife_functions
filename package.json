@@ -2,7 +2,7 @@
   "name": "threethingstodoinlife_functions",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
-  "version": "1.4.0",
+  "version": "1.0.0",
   "description": "Three thing to do in life",
   "files": [
     "dist/**/*.js",
@@ -29,8 +29,8 @@
     "test:ci:ava": "nyc -r lcovonly -r text -r json ava"
   },
   "config": {
-    "eslint": "--ignore-pattern README.md --ignore-path .gitignore --cache --format=codeframe --max-warnings=0 \"{src,scripts,.github,test}/**/*.{ts,js,md,html}\" \"*.{ts,js,md,html}\" \".*.{ts,js,md,html}\"",
-    "prettier": "--ignore-path .gitignore --loglevel=warn \"{src,scripts,.github}/**/*.{ts,js,md,yml,json,html}\" \"*.{ts,js,yml,json,html}\" \".*.{ts,js,yml,json,html}\" \"!**/package-lock.json\" \"!package-lock.json\""
+    "eslint": "--ignore-pattern README.md --ignore-path .gitignore --cache --format=codeframe --max-warnings=0 \"{netlify,src,scripts,.github,test}/**/*.{ts,js,md,html}\" \"*.{ts,js,md,html}\" \".*.{ts,js,md,html}\"",
+    "prettier": "--ignore-path .gitignore --loglevel=warn \"{netlify,src,scripts,.github}/**/*.{ts,js,md,yml,json,html}\" \"*.{ts,js,yml,json,html}\" \".*.{ts,js,yml,json,html}\" \"!**/package-lock.json\" \"!package-lock.json\""
   },
   "ava": {
     "files": [
@@ -50,7 +50,7 @@
     "in",
     "life"
   ],
-  "author": "Netlify Inc.",
+  "author": "Alex P. Scigalszky",
   "license": "MIT",
   "repository": {
     "type": "git",
