@@ -4,7 +4,12 @@
   "description": "Three thing to do in life",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "start": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "threethingstodoinlife_functions": "build/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +31,15 @@
   },
   "homepage": "https://github.com/AlexScigalszky/threethingstodoinlife_functions#readme",
   "dependencies": {
-    "@netlify/functions": "^1.4.0"
+    "@netlify/functions": "^1.4.0",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/node": "^14.6.0",
+    "@types/prompts": "^2.0.8",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.7"
   }
 }
