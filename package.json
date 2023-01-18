@@ -1,0 +1,31 @@
+{
+  "name": "threethingstodoinlife_functions",
+  "version": "1.0.0",
+  "description": "Three thing to do in life",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexScigalszky/threethingstodoinlife_functions.git"
+  },
+  "keywords": [
+    "functions",
+    "three",
+    "things",
+    "to",
+    "do",
+    "in",
+    "life"
+  ],
+  "author": "Alex P. Scigalszky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexScigalszky/threethingstodoinlife_functions/issues"
+  },
+  "homepage": "https://github.com/AlexScigalszky/threethingstodoinlife_functions#readme",
+  "dependencies": {
+    "@netlify/functions": "^1.4.0"
+  }
+}
