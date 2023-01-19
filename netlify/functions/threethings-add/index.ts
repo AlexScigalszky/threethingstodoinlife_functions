@@ -34,7 +34,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     return {
       statusCode: 500,
       // eslint-disable-next-line n/prefer-global/process
-      body: error.toString() + process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      body: error.toString() + process.env.GOOGLE_PRIVATE_KEY,
     }
   }
 }
