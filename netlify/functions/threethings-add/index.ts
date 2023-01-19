@@ -10,7 +10,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       // eslint-disable-next-line n/prefer-global/process
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       // eslint-disable-next-line n/prefer-global/process
-      private_key: process.env.GOOGLE_PRIVATE_KEY,
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, "\n"),
     })
     // await doc.useServiceAccountAuth(require('./your-service-account.json'))
     await doc.loadInfo()
@@ -34,7 +34,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     return {
       statusCode: 500,
       // eslint-disable-next-line n/prefer-global/process
-      body: error.toString() + process.env.GOOGLE_PRIVATE_KEY,
+      body: error.toString() + process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, "\n"),
     }
   }
 }
