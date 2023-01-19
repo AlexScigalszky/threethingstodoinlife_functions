@@ -14,14 +14,14 @@ const handler: Handler = async (event: HandlerEvent) => {
     })
     // await doc.useServiceAccountAuth(require('./your-service-account.json'))
     await doc.loadInfo()
+    // eslint-disable-next-line prefer-destructuring
+    const sheet = doc.sheetsByIndex[0]
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `row added${doc}`,
+        message: `row added${JSON.stringify(sheet)}`,
       }),
     }
-    // eslint-disable-next-line prefer-destructuring
-    const sheet = doc.sheetsByIndex[0]
 
     const data = JSON.parse(event.body)
     const addedRow = await sheet.addRow(data)
