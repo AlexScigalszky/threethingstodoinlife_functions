@@ -16,12 +16,6 @@ const handler: Handler = async (event: HandlerEvent) => {
     await doc.loadInfo()
     // eslint-disable-next-line prefer-destructuring
     const sheet = doc.sheetsByIndex[0]
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: `row added${JSON.stringify(sheet)}`,
-      }),
-    }
 
     const data = JSON.parse(event.body)
     const addedRow = await sheet.addRow(data)
@@ -33,13 +27,13 @@ const handler: Handler = async (event: HandlerEvent) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `row added${addedRow}`,
+        message: `row added${event.body}`,
       }),
     }
   } catch (error) {
     return {
       statusCode: 500,
-      body: error.toString(),
+      body: error.toString() + event.body,
     }
   }
 }
