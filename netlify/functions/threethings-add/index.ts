@@ -27,7 +27,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `row added${event.body}`,
+        message: `row added${addedRow}${event.body}`,
       }),
     }
   } catch (error) {
