@@ -10,10 +10,16 @@ const handler: Handler = async (event: HandlerEvent) => {
       // eslint-disable-next-line n/prefer-global/process
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       // eslint-disable-next-line n/prefer-global/process
-      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, "\n"),
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
     })
     // await doc.useServiceAccountAuth(require('./your-service-account.json'))
     await doc.loadInfo()
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: `row added${doc}`,
+      }),
+    }
     // eslint-disable-next-line prefer-destructuring
     const sheet = doc.sheetsByIndex[0]
 
@@ -33,8 +39,7 @@ const handler: Handler = async (event: HandlerEvent) => {
   } catch (error) {
     return {
       statusCode: 500,
-      // eslint-disable-next-line n/prefer-global/process
-      body: error.toString() + process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, "\n"),
+      body: error.toString(),
     }
   }
 }
