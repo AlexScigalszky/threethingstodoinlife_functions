@@ -9,7 +9,7 @@ const handler: Handler = async () => {
 
     return {
       statusCode: 200,
-      body: list,
+      body: JSON.stringify(list),
     }
   } catch (error) {
     return {
