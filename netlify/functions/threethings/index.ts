@@ -10,11 +10,16 @@ const handler: Handler = async () => {
     return {
       statusCode: 200,
       body: JSON.stringify(list),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+      },
     }
   } catch (error) {
     return {
       statusCode: 500,
       body: error.toString(),
+      
     }
   }
 }
