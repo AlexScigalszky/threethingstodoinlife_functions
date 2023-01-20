@@ -1,9 +1,11 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet'
+import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet'
 
 // eslint-disable-next-line n/no-missing-import
 import { GoogleSpreadsheetValue } from '../models/google_spreadsheet_value'
 // eslint-disable-next-line n/no-missing-import
 import { ThreeThings } from '../models/three_things'
+
+const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => item as unknown as ThreeThings
 
 export const getDb = async () => {
   const spreadSheetId = '1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM'
@@ -19,6 +21,12 @@ export const getDb = async () => {
   await doc.loadInfo()
 
   return doc.sheetsByIndex[0]
+}
+
+export const getRows = async (): Promise<ThreeThings[]> => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+  return rows.map(dbToThreeThings)
 }
 
 export const addRow = async (data: ThreeThings) => {

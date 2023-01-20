@@ -1,11 +1,11 @@
 import { Handler } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { getDb } from '../../../src/utils/spreadsheet_db'
+import { getRows } from '../../../src/utils/spreadsheet_db'
 
 const handler: Handler = async () => {
   try {
-    const list = await getDb()
+    const list = await getRows()
 
     return {
       statusCode: 200,
