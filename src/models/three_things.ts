@@ -1,10 +1,5 @@
-export interface GoogleSpreadsheetValue {
-  /**
-   * @description
-   * This represents the properties that get loaded using the header row
-   */
-  [x: string]: string | number | boolean
-}
+// eslint-disable-next-line n/no-missing-import
+import { GoogleSpreadsheetValue } from './google_spreadsheet_value'
 
 export interface ThreeThings extends GoogleSpreadsheetValue {
   first: string

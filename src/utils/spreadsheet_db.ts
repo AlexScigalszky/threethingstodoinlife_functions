@@ -1,7 +1,9 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet'
 
 // eslint-disable-next-line n/no-missing-import
-import { GoogleSpreadsheetValue, ThreeThings } from '../models/three_things'
+import { GoogleSpreadsheetValue } from '../models/google_spreadsheet_value'
+// eslint-disable-next-line n/no-missing-import
+import { ThreeThings } from '../models/three_things'
 
 export const getDb = async () => {
   const spreadSheetId = '1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM'
