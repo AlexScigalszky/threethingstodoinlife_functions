@@ -8,6 +8,10 @@ const handler: Handler = async () =>
   await Promise.resolve({
     statusCode: 200,
     body: JSON.stringify(links),
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+    },
   })
 
 export { handler }

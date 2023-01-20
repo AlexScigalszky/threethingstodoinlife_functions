@@ -16,6 +16,7 @@ module.exports = {
         'no-restricted-exports': 'off',
         'arrow-body-style': 'off',
         'n/no-missing-import': 'off',
+        'import/no-extraneous-dependencies': 'off',
       },
     },
   ],

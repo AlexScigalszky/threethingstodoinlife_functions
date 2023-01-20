@@ -19,7 +19,6 @@ const handler: Handler = async () => {
     return {
       statusCode: 500,
       body: error.toString(),
-      
     }
   }
 }
