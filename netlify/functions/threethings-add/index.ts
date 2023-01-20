@@ -18,13 +18,11 @@ const handler: Handler = async (event: HandlerEvent) => {
     const sheet = doc.sheetsByIndex[0]
 
     const data = JSON.parse(event.body)
-    const addedRow = await sheet.addRow(data)
+    await sheet.addRow(data)
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: `row added`,
-      }),
+      body: `row added`,
     }
   } catch (error) {
     return {
