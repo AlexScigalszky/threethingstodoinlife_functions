@@ -20,10 +20,6 @@ const handler: Handler = async (event: HandlerEvent) => {
     const data = JSON.parse(event.body)
     const addedRow = await sheet.addRow(data)
 
-    // return await Promise.resolve({
-    //     statusCode: 200,
-    //     body: JSON.stringify({ message: `Hello World${event}${context}` }),
-    //   })
     return {
       statusCode: 200,
       body: JSON.stringify({
@@ -39,7 +35,3 @@ const handler: Handler = async (event: HandlerEvent) => {
 }
 
 export { handler }
-
-// doc id: 1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM
-// google client id:  348929802688-cjol6jg7uqu00tkho03tg0f1dsci4lei.apps.googleusercontent.com
-// google client secret:  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

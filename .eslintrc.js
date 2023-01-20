@@ -15,6 +15,7 @@ module.exports = {
         'unicorn/filename-case': 'off',
         'no-restricted-exports': 'off',
         'arrow-body-style': 'off',
+        'n/no-missing-import': 'off',
       },
     },
   ],
