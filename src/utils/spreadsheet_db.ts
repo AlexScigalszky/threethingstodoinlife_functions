@@ -5,7 +5,11 @@ import { GoogleSpreadsheetValue } from '../models/google_spreadsheet_value'
 // eslint-disable-next-line n/no-missing-import
 import { ThreeThings } from '../models/three_things'
 
-const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => item as unknown as ThreeThings
+const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
+  first: item.first,
+  second: item.second,
+  third: item.third,
+})
 
 export const getDb = async () => {
   const spreadSheetId = '1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM'
