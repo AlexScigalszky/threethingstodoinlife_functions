@@ -56,9 +56,9 @@ export const deleteById = async (id: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
 
-  const row = rows.find((item) => item.identifier === id.toString().toLowerCase())
+  const row = rows.find((item) => dbToThreeThings(item).identifier === id.toString().toLowerCase())
   if (!row) {
-    return JSON.stringify(rows)
+    return JSON.stringify(rows.map(dbToThreeThings))
   }
   await row.delete()
   return '+1'
