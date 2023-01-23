@@ -48,7 +48,7 @@ export const addRow = async (data: ThreeThings) => {
 export const find = async (id: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
-  const row = rows.find((item) => item.identifier === id)
+  const row = rows.find((item) => dbToThreeThings(item).identifier === id)
   return row ? dbToThreeThings(row) : null
 }
 
@@ -56,7 +56,7 @@ export const deleteById = async (data: ThreeThings) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
   // eslint-disable-next-line n/no-unsupported-features/es-syntax
-  const row = rows.find((item) => item.identifier === data.identifier) ?? rows[0];
+  const row = rows.find((item) => dbToThreeThings(item).identifier === data.identifier)
   // if (!row) {
   //   return
   // }
