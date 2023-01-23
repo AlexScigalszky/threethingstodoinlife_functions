@@ -55,10 +55,11 @@ export const find = async (id: string) => {
 export const deleteById = async (data: ThreeThings) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
-  // eslint-disable-next-line n/no-unsupported-features/es-syntax
+
   const row = rows.find((item) => dbToThreeThings(item).identifier === data.identifier)
-  // if (!row) {
-  //   return
-  // }
+  if (!row) {
+    return rows;
+  }
   await row.delete()
+  return "+1";
 }
