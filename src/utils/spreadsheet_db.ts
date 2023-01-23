@@ -56,7 +56,7 @@ export const deleteById = async (data: ThreeThings) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
 
-  const row = rows.find((item) => item.identifier.toString() === data.identifier.toString().toLowerCase())
+  const row = rows.find((item) => item.identifier === data.identifier.toString().toLowerCase())
   if (!row) {
     return JSON.stringify(rows)
   }
