@@ -58,7 +58,7 @@ export const deleteById = async (id: string) => {
   await row.delete()
 }
 
-export const updateById = async (id: string, updateFn: (input: ThreeThings) => ThreeThings) => {
+export const updateById = async (id: string, updateFn: (input: GoogleSpreadsheetRow) => GoogleSpreadsheetRow) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
 
@@ -66,7 +66,5 @@ export const updateById = async (id: string, updateFn: (input: ThreeThings) => T
   if (!row) {
     throw new Error('row not found')
   }
-  const item = updateFn(dbToThreeThings(row))
-
-  await (item as unknown as GoogleSpreadsheetRow).save()
+  await updateFn(row).save()
 }

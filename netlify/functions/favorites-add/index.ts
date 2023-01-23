@@ -6,10 +6,11 @@ import { updateById } from '../../../src/utils/spreadsheet_db'
 const handler: Handler = async (event: HandlerEvent) => {
   try {
     const data = JSON.parse(event.body)
-    await updateById(data.identifier, (item) => ({
-      ...item,
-      favorites: item.favorites + 1,
-    }))
+    await updateById(data.identifier, (item) => {
+      // eslint-disable-next-line no-param-reassign
+      item.favorites += 1
+      return item
+    })
 
     return {
       statusCode: 200,
