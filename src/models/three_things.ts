@@ -2,7 +2,7 @@
 import { GoogleSpreadsheetValue } from './google_spreadsheet_value'
 
 export interface ThreeThings extends GoogleSpreadsheetValue {
-  id: string
+  identifier: string
   first: string
   second: string
   third: string

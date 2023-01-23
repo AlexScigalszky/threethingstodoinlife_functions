@@ -6,7 +6,7 @@ import { deleteById } from '../../../src/utils/spreadsheet_db'
 const handler: Handler = async (event: HandlerEvent) => {
   try {
     const data = JSON.parse(event.body)
-    await deleteById(data.id)
+    await deleteById(data.identifier)
 
     return {
       statusCode: 200,

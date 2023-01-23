@@ -9,7 +9,7 @@ import { ThreeThings } from '../models/three_things'
 import { generateUniqueId } from './id_generator'
 
 const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
-  id: item.id,
+  identifier: item.identifier,
   first: item.first,
   second: item.second,
   third: item.third,
@@ -55,9 +55,9 @@ export const find = async (id: string) => {
 export const deleteById = async (data: ThreeThings) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
-  const row = rows.find((item) => item.id === data.id)
-  if (!row) {
-    return
-  }
+  const row = rows.find((item) => item.identifier === data.identifier)
+  // if (!row) {
+  //   return
+  // }
   await row.delete()
 }
