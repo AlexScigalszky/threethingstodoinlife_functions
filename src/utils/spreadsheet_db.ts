@@ -38,7 +38,7 @@ export const getRows = async (): Promise<ThreeThings[]> => {
 
 export const addRow = async (data: ThreeThings) => {
   const dataWithId = {
-    id: generateUniqueId(),
+    identifier: generateUniqueId(),
     ...data,
   }
   const sheet = await getDb()
@@ -48,7 +48,7 @@ export const addRow = async (data: ThreeThings) => {
 export const find = async (id: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
-  const row = rows.find((item) => item.id === id)
+  const row = rows.find((item) => item.identifier === id)
   return row ? dbToThreeThings(row) : null
 }
 
