@@ -56,10 +56,10 @@ export const deleteById = async (data: ThreeThings) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
 
-  const row = rows.find((item) => dbToThreeThings(item).identifier === data.identifier)
+  const row = rows.find((item) => item.identifier.toString() === data.identifier.toString().toLowerCase())
   if (!row) {
-    return rows;
+    return JSON.stringify(rows)
   }
   await row.delete()
-  return "+1";
+  return '+1'
 }
