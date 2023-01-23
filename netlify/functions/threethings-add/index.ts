@@ -1,14 +1,12 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { getDb } from '../../../src/utils/spreadsheet_db'
+import { addRow } from '../../../src/utils/spreadsheet_db'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {
-    const sheet = await getDb()
-
     const data = JSON.parse(event.body)
-    await sheet.addRow(data)
+    await addRow(data)
 
     return {
       statusCode: 200,
