@@ -58,8 +58,7 @@ export const deleteById = async (id: string) => {
 
   const row = rows.find((item) => dbToThreeThings(item).identifier === id.toString().toLowerCase())
   if (!row) {
-    return JSON.stringify({ rows: rows.map(dbToThreeThings), identifier: id })
+    throw new Error('row not found')
   }
   await row.delete()
-  return '+1'
 }

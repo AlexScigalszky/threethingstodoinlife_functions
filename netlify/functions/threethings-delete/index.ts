@@ -6,11 +6,11 @@ import { deleteById } from '../../../src/utils/spreadsheet_db'
 const handler: Handler = async (event: HandlerEvent) => {
   try {
     const data = JSON.parse(event.body)
-    const result = await deleteById(data.identifier)
+    await deleteById(data.identifier)
 
     return {
       statusCode: 200,
-      body: `row deleted${result}`,
+      body: `row deleted`,
     }
   } catch (error) {
     return {
