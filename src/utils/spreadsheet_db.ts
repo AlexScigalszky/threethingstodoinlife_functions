@@ -58,7 +58,7 @@ export const deleteById = async (id: string) => {
 
   const row = rows.find((item) => dbToThreeThings(item).identifier === id.toString().toLowerCase())
   if (!row) {
-    return JSON.stringify(rows.map(dbToThreeThings))
+    return JSON.stringify({ rows: rows.map(dbToThreeThings), identifier: id })
   }
   await row.delete()
   return '+1'
