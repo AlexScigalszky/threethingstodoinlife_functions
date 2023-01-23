@@ -1,18 +1,16 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { getDb } from '../../../src/utils/spreadsheet_db'
+import { deleteById } from '../../../src/utils/spreadsheet_db'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {
-    const sheet = await getDb()
-
     const data = JSON.parse(event.body)
-    await sheet.addRow(data)
+    await deleteById(data.id)
 
     return {
       statusCode: 200,
-      body: `row added`,
+      body: `row deleted`,
     }
   } catch (error) {
     return {

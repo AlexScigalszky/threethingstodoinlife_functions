@@ -5,7 +5,11 @@ import { GoogleSpreadsheetValue } from '../models/google_spreadsheet_value'
 // eslint-disable-next-line n/no-missing-import
 import { ThreeThings } from '../models/three_things'
 
+// eslint-disable-next-line n/no-missing-import
+import { generateUniqueId } from './id_generator'
+
 const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
+  id: item.id,
   first: item.first,
   second: item.second,
   third: item.third,
@@ -21,7 +25,6 @@ export const getDb = async () => {
     // eslint-disable-next-line n/prefer-global/process
     private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
   })
-  // await doc.useServiceAccountAuth(require('./your-service-account.json'))
   await doc.loadInfo()
 
   return doc.sheetsByIndex[0]
@@ -34,6 +37,27 @@ export const getRows = async (): Promise<ThreeThings[]> => {
 }
 
 export const addRow = async (data: ThreeThings) => {
+  const dataWithId = {
+    id: generateUniqueId(),
+    ...data,
+  }
   const sheet = await getDb()
-  return await sheet.addRow(data as GoogleSpreadsheetValue)
+  return await sheet.addRow(dataWithId as GoogleSpreadsheetValue)
+}
+
+export const find = async (id: string) => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+  const row = rows.find((item) => item.id === id)
+  return row ? dbToThreeThings(row) : null
+}
+
+export const deleteById = async (data: ThreeThings) => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+  const row = rows.find((item) => item.id === data.id)
+  if (!row) {
+    return
+  }
+  await row.delete()
 }
