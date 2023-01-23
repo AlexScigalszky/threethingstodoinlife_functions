@@ -13,6 +13,8 @@ const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
   first: item.first,
   second: item.second,
   third: item.third,
+  // eslint-disable-next-line n/no-unsupported-features/es-syntax
+  favorites: item.favorites ?? 0,
 })
 
 export const getDb = async () => {
@@ -45,13 +47,6 @@ export const addRow = async (data: ThreeThings) => {
   return await sheet.addRow(dataWithId as GoogleSpreadsheetValue)
 }
 
-export const find = async (id: string) => {
-  const sheet = await getDb()
-  const rows = await sheet.getRows()
-  const row = rows.find((item) => dbToThreeThings(item).identifier === id)
-  return row ? dbToThreeThings(row) : null
-}
-
 export const deleteById = async (id: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
@@ -61,4 +56,17 @@ export const deleteById = async (id: string) => {
     throw new Error('row not found')
   }
   await row.delete()
+}
+
+export const updateById = async (id: string, updateFn: (input: ThreeThings) => ThreeThings) => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+
+  const row = rows.find((item) => dbToThreeThings(item).identifier === id.toString().toLowerCase())
+  if (!row) {
+    throw new Error('row not found')
+  }
+  const item = updateFn(dbToThreeThings(row))
+
+  await (item as unknown as GoogleSpreadsheetRow).save()
 }
