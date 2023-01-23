@@ -1,7 +1,6 @@
 const SIZE = 16
-const MAX_NUMBER = 0x1_00_00
+const MAX_NUMBER = 36
 export const generateUniqueId = function () {
-  return Math.floor((1 + Math.random()) * MAX_NUMBER)
-    .toString(SIZE)
-    .slice(1)
+  return Math.random().toString(MAX_NUMBER).slice(2, SIZE) + 
+    Math.random().toString(MAX_NUMBER).slice(2, SIZE)
 }
