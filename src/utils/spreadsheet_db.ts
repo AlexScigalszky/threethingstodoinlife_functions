@@ -52,11 +52,11 @@ export const find = async (id: string) => {
   return row ? dbToThreeThings(row) : null
 }
 
-export const deleteById = async (data: ThreeThings) => {
+export const deleteById = async (id: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
 
-  const row = rows.find((item) => item.identifier === data.identifier.toString().toLowerCase())
+  const row = rows.find((item) => item.identifier === id.toString().toLowerCase())
   if (!row) {
     return JSON.stringify(rows)
   }
