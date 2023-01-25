@@ -8,7 +8,6 @@ const handler: Handler = async (event: HandlerEvent) => {
     const data = JSON.parse(event.body)
     await updateById(data.identifier, (item) => {
       // eslint-disable-next-line no-param-reassign
-      item.favorites = item.favorites ?? 0
       item.favorites += 1
       return item
     })
