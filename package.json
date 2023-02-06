@@ -65,7 +65,9 @@
   "dependencies": {
     "@netlify/functions": "^1.4.0",
     "axios": "^1.2.3",
-    "google-spreadsheet": "^3.3.0"
+    "google-spreadsheet": "^3.3.0",
+    "qr-image": "^3.2.0",
+    "whatsapp-web.js": "^1.19.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",

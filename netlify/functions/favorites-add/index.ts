@@ -5,6 +5,18 @@ import { updateById } from '../../../src/utils/spreadsheet_db'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    }
+    if (event.httpMethod === 'OPTIONS') {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ message: 'Successful preflight call.' }),
+      }
+    }
     const data = JSON.parse(event.body)
     await updateById(data.identifier, (item) => {
       // eslint-disable-next-line no-param-reassign
