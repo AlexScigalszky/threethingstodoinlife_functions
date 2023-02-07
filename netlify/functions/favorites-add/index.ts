@@ -26,6 +26,6 @@ const handler: Handler = async (event: HandlerEvent) => {
   }
 }
 
-const decoratedHandler = CorsBase(handler, handler.name, handler);
+const decoratedHandler = CorsBase(handler, handler.name, handler as unknown as PropertyDescriptor)
 
 export { decoratedHandler }
