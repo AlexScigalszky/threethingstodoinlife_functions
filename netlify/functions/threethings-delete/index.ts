@@ -10,7 +10,7 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     return {
       statusCode: 200,
-      body: `row deleted`,
+      body: JSON.stringify({ message: `row deleted` }),
     }
   } catch (error) {
     return {

@@ -14,7 +14,7 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     return {
       statusCode: 200,
-      body: `favorite added`,
+      body: JSON.stringify({ message: `favorite removed` }),
     }
   } catch (error) {
     return {

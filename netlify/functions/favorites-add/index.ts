@@ -1,22 +1,12 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
+import { Cors } from '../../../src/decorators/cors'
+// eslint-disable-next-line n/no-missing-import
 import { updateById } from '../../../src/utils/spreadsheet_db'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Methods': '*',
-    }
-    if (event.httpMethod === 'OPTIONS') {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ message: 'Successful preflight call.' }),
-      }
-    }
     const data = JSON.parse(event.body)
     await updateById(data.identifier, (item) => {
       // eslint-disable-next-line no-param-reassign
@@ -26,8 +16,7 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     return {
       statusCode: 200,
-      headers,
-      body: `favorite added`,
+      body: JSON.stringify({ message: `favorite added` }),
     }
   } catch (error) {
     return {
@@ -37,4 +26,6 @@ const handler: Handler = async (event: HandlerEvent) => {
   }
 }
 
-export { handler }
+const decoratedHandler = Cors(handler)
+
+export { decoratedHandler }
