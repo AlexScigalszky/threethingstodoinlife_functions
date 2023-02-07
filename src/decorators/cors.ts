@@ -34,12 +34,6 @@ const CorsBase = (_target: unknown, _propertyKey: string, descriptor: PropertyDe
   const original = descriptor.value
   // eslint-disable-next-line no-param-reassign
   descriptor.value = (event: HandlerEvent, ...args: unknown[]) => {
-    // for (const arg of args) {
-    //   if (arg < 0) {
-    //     console.log(`El argumento ${arg} no es positivo`)
-    //     return
-    //   }
-    // }
     const headers = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',

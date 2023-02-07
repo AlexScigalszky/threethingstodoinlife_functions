@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { Cors } from '../../../src/decorators/cors'
+import { CorsBase } from '../../../src/decorators/cors'
 // eslint-disable-next-line n/no-missing-import
 import { updateById } from '../../../src/utils/spreadsheet_db'
 
@@ -26,6 +26,6 @@ const handler: Handler = async (event: HandlerEvent) => {
   }
 }
 
-const decoratedHandler = Cors(handler)
+const decoratedHandler = CorsBase(handler, handler.name, handler);
 
 export { decoratedHandler }
