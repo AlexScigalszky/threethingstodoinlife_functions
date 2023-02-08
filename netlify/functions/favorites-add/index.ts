@@ -20,7 +20,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     return {
       statusCode: 200,
       headers,
-      body: `favorite added`,
+      body: JSON.stringify({ message: `favorite added` }),
     }
   } catch (error) {
     return {
