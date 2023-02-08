@@ -5,11 +5,10 @@ import { headers, allowOptions } from '../../../src/utils/headers'
 // eslint-disable-next-line n/no-missing-import
 import { updateById } from '../../../src/utils/spreadsheet_db'
 
-
 const handler: Handler = async (event: HandlerEvent) => {
   try {
-    const result = allowOptions(event);
-    if (result) return result;
+    const result = allowOptions(event)
+    if (result) return result
 
     const data = JSON.parse(event.body)
     await updateById(data.identifier, (item) => {

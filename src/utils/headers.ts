@@ -1,4 +1,4 @@
-import { HandlerEvent } from "@netlify/functions"
+import { HandlerEvent } from '@netlify/functions'
 
 export const headers = {
   'Access-Control-Allow-Origin': '*',
