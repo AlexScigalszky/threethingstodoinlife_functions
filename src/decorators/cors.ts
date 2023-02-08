@@ -1,57 +1,52 @@
-// const Cors = (options: string): MethodDecorator  => {
-//   console.log(`alex${options}`)
-//   // eslint-disable-next-line func-names
-//   return function (this: (...args: any) => any): any {
-//     // const argsString: string = JSON.stringify(args)
-//     // if (container === null) {
-//     //   container = getCacheContainer(target.constructor as any)
-//     //   if (container) {
-//     //     provider.addToContainer(container, cacheObject)
-//     //   }
-//     // }
+import { Handler, HandlerEvent } from '@netlify/functions'
 
-import { HandlerEvent } from '@netlify/functions'
 
-//     // if (!cacheObject.hasCache(argsString) || cacheObject.isExpired(argsString)) {
-//     //   const res = method.call(this, ...args)
+// eslint-disable-next-line @typescript-eslint/ban-types, unicorn/consistent-function-scoping
+const Cors = () => (_target: Object, _key: string | symbol, descriptor: PropertyDescriptor) => {
+    const original = descriptor.value;
 
-//     //   provider.setCache(options, argsString, res)
+    // eslint-disable-next-line no-param-reassign, @typescript-eslint/no-unused-vars
+    descriptor.value = (...args: unknown[]) => {
+      // eslint-disable-next-line no-invalid-this
+      const result = original.apply(this);
+      return result;
+    }
+  };
 
-//     //   const isPromise = res && typeof res.then === 'function' && typeof res.catch === 'function'
+// 
+// const headers = {
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Headers': '*',
+//     'Access-Control-Allow-Methods': '*',
+// }
+// if (event.httpMethod === 'OPTIONS') {
+//     return {
+//       statusCode: 200,
+//       headers,
+//       body: JSON.stringify({ message: 'Successful preflight call.' }),
+//     }
+// }
+// 
 
-//     //   if (isPromise && options.cacheUntilRejected) {
-//     //     res.catch(() => cacheObject.clearArgs(argsString))
-//     //   }
-//     // }
+// type HandleLogicFn = () => Handler
+
+// const handler: Handler = async (event: HandlerEvent) => {
+//   try {
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify({ message: `favorite added` }),
+//     }
+//   } catch (error) {
+//     return {
+//       statusCode: 500,
+//       body: error.toString(),
+//     }
 //   }
 // }
-const logged = (_target: unknown, propertyKey: unknown, descriptor?: PropertyDescriptor) => {
-  console.log(`La función ${propertyKey} ha sido llamada`)
-  return descriptor
-}
 
-const CorsBase = (_target: unknown, _propertyKey: string, descriptor: PropertyDescriptor) => {
-  const original = descriptor.value
-  // eslint-disable-next-line no-param-reassign
-  descriptor.value = (event: HandlerEvent, ...args: unknown[]) => {
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Methods': '*',
-    }
-    if (event.httpMethod === 'OPTIONS') {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ message: 'Successful preflight call.' }),
-      }
-    }
-    // eslint-disable-next-line no-invalid-this
-    return original.apply(this, args)
-  }
-  return descriptor
-}
+// const AddCors: (handlerlogic: Handler) => Handler = (handlerlogic: Handler) => handlerlogic;
 
-const Cors = (target: { name: string }) => CorsBase(target, target.name, target as unknown as PropertyDescriptor)
+// export { AddCors }
+// ame, target)
 
-export { logged, CorsBase, Cors }
+export { Cors }

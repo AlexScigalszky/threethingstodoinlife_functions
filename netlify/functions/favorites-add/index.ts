@@ -1,12 +1,16 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { CorsBase } from '../../../src/decorators/cors'
+import { headers, allowOptions } from '../../../src/utils/headers'
 // eslint-disable-next-line n/no-missing-import
 import { updateById } from '../../../src/utils/spreadsheet_db'
 
+
 const handler: Handler = async (event: HandlerEvent) => {
   try {
+    const result = allowOptions(event);
+    if (result) return result;
+
     const data = JSON.parse(event.body)
     await updateById(data.identifier, (item) => {
       // eslint-disable-next-line no-param-reassign
@@ -16,7 +20,8 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `favorite added` }),
+      headers,
+      body: `favorite added`,
     }
   } catch (error) {
     return {
@@ -26,6 +31,4 @@ const handler: Handler = async (event: HandlerEvent) => {
   }
 }
 
-const decoratedHandler = CorsBase(handler, handler.name, handler as unknown as PropertyDescriptor)
-
-export { decoratedHandler }
+export { handler }
