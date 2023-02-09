@@ -9,11 +9,11 @@ const handler: Handler = async (event: HandlerEvent) => {
   try {
     const result = allowOptions(event)
     if (result) return result
-    
+
     const data = JSON.parse(event.body)
     await updateById(data.identifier, (item) => {
       // eslint-disable-next-line no-param-reassign
-      item.favorites += 1
+      item.favorites -= Number(item.favorites)
       return item
     })
 
