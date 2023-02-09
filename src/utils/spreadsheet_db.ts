@@ -41,6 +41,7 @@ export const getRows = async (): Promise<ThreeThings[]> => {
 export const addRow = async (data: ThreeThings) => {
   const dataWithId = {
     identifier: generateUniqueId(),
+    favorites: data.favorites ? data.favorites : 0,
     ...data,
   }
   const sheet = await getDb()

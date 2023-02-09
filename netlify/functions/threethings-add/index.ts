@@ -9,7 +9,7 @@ const handler: Handler = async (event: HandlerEvent) => {
   try {
     const result = allowOptions(event)
     if (result) return result
-    
+
     const data = JSON.parse(event.body)
     await addRow(data)
 
