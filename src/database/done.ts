@@ -62,9 +62,5 @@ export const getRowsByUserIdentifier = async (userIdentifier: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
 
-  const row = rows.find((item) => dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase())
-  if (!row) {
-    throw new Error('row not found')
-  }
-  return rows.map(dbToDone)
+  return rows.filter((item) => dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase()).map(dbToDone)
 }
