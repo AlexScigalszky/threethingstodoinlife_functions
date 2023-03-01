@@ -57,3 +57,14 @@ export const updateById = async (id: string, updateFn: (input: GoogleSpreadsheet
   }
   await updateFn(row).save()
 }
+
+export const getRowsByUserIdentifier = async (userIdentifier: string) => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+
+  const row = rows.find((item) => dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase())
+  if (!row) {
+    throw new Error('row not found')
+  }
+  return rows.map(dbToDone)
+}
