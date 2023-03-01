@@ -1,12 +1,16 @@
-import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet'
+import { GoogleSpreadsheetRow } from 'google-spreadsheet'
 
 // eslint-disable-next-line n/no-missing-import
 import { GoogleSpreadsheetValue } from '../models/google_spreadsheet_value'
 // eslint-disable-next-line n/no-missing-import
 import { ThreeThings } from '../models/three_things'
+// eslint-disable-next-line n/no-missing-import
+import { generateUniqueId } from '../utils/id_generator'
 
 // eslint-disable-next-line n/no-missing-import
-import { generateUniqueId } from './id_generator'
+import { getTable } from './base'
+
+const getDb = () => getTable(0)
 
 const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
   identifier: item.identifier,
@@ -16,21 +20,6 @@ const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
   // eslint-disable-next-line n/no-unsupported-features/es-syntax
   favorites: item.favorites ?? 0,
 })
-
-export const getDb = async () => {
-  const spreadSheetId = '1s96VqHGD72FoQlWOYN3ggyL_rMWJ4GYn6cAN-IByXJM'
-
-  const doc = new GoogleSpreadsheet(spreadSheetId)
-  await doc.useServiceAccountAuth({
-    // eslint-disable-next-line n/prefer-global/process
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    // eslint-disable-next-line n/prefer-global/process
-    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
-  })
-  await doc.loadInfo()
-
-  return doc.sheetsByIndex[0]
-}
 
 export const getRows = async (): Promise<ThreeThings[]> => {
   const sheet = await getDb()

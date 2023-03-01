@@ -1,9 +1,9 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { headers, allowOptions } from '../../../src/utils/headers'
+import { updateById } from '../../../src/database/ttt'
 // eslint-disable-next-line n/no-missing-import
-import { updateById } from '../../../src/utils/spreadsheet_db'
+import { headers, allowOptions } from '../../../src/utils/headers'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {

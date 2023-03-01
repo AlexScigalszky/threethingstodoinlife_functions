@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { updateById } from '../../../src/database/ttt'
+import { addRow } from '../../../src/database/done'
 // eslint-disable-next-line n/no-missing-import
 import { allowOptions, headers } from '../../../src/utils/headers'
 
@@ -11,16 +11,13 @@ const handler: Handler = async (event: HandlerEvent) => {
     if (result) return result
 
     const data = JSON.parse(event.body)
-    await updateById(data.identifier, (item) => {
-      // eslint-disable-next-line no-param-reassign
-      item.favorites = Number(item.favorites) - 1
-      return item
-    })
+
+    await addRow(data)
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ message: `favorite removed` }),
+      body: JSON.stringify({ message: `row added` }),
     }
   } catch (error) {
     return {

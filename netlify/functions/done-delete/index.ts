@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { deleteById } from '../../../src/database/ttt'
+import { deleteById } from '../../../src/database/done'
 
 const handler: Handler = async (event: HandlerEvent) => {
   try {

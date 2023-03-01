@@ -1,7 +1,7 @@
 import { Handler } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { getRows } from '../../../src/utils/spreadsheet_db'
+import { getRows } from '../../../src/database/ttt'
 
 const handler: Handler = async () => {
   try {
