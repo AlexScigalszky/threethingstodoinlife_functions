@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
+import { addRow, getRowsByUserAndTttIdentifier, updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
 // eslint-disable-next-line n/no-missing-import
 import { ThingsOrder } from '../../../src/enums/things_order'
 // eslint-disable-next-line n/no-missing-import
@@ -14,25 +14,38 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     const data = JSON.parse(event.body)
 
-    await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
-      switch (data.order) {
-        case ThingsOrder.first:
-          // eslint-disable-next-line no-param-reassign
-          item.doneFirst = 1
-          break
-        case ThingsOrder.second:
-          // eslint-disable-next-line no-param-reassign
-          item.doneSecond = 1
-          break
-        case ThingsOrder.third:
-          // eslint-disable-next-line no-param-reassign
-          item.doneThird = 1
-          break
-        default:
-          break
-      }
-      return item
-    })
+    const exists = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
+    // eslint-disable-next-line unicorn/prefer-ternary, unicorn/explicit-length-check
+    if (exists.length === 0) {
+      await addRow({
+        identifier: null,
+        userIdentifier: data.userIdentifier,
+        tttIdentifier: data.identifier,
+        doneFirst: data.order === ThingsOrder.first ? true : null,
+        doneSecond: data.order === ThingsOrder.second ? true : null,
+        doneThird: data.order === ThingsOrder.third ? true : null,
+      })
+    } else {
+      await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
+        switch (data.order) {
+          case ThingsOrder.first:
+            // eslint-disable-next-line no-param-reassign
+            item.doneFirst = true
+            break
+          case ThingsOrder.second:
+            // eslint-disable-next-line no-param-reassign
+            item.doneSecond = true
+            break
+          case ThingsOrder.third:
+            // eslint-disable-next-line no-param-reassign
+            item.doneThird = true
+            break
+          default:
+            break
+        }
+        return item
+      })
+    }
 
     return {
       statusCode: 200,

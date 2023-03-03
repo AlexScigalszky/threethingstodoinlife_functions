@@ -71,6 +71,9 @@ export const updateByTttIdentifierUserIdentifier = async (
       dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase() &&
       dbToDone(item).tttIdentifier === tttIdentifier.toString().toLowerCase(),
   )
+  if (!row) {
+    throw new Error('row not found')
+  }
   await updateFn(row).save()
 }
 
