@@ -64,3 +64,16 @@ export const getRowsByUserIdentifier = async (userIdentifier: string) => {
 
   return rows.filter((item) => dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase()).map(dbToDone)
 }
+
+export const getRowsByUserAndTttIdentifier = async (userIdentifier: string, tttIdentifier: string) => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+
+  return rows
+    .filter(
+      (item) =>
+        dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase() &&
+        dbToDone(item).tttIdentifier === tttIdentifier.toString().toLowerCase(),
+    )
+    .map(dbToDone)
+}
