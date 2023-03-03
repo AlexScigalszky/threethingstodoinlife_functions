@@ -58,6 +58,22 @@ export const updateById = async (id: string, updateFn: (input: GoogleSpreadsheet
   await updateFn(row).save()
 }
 
+export const updateByTttIdentifierUserIdentifier = async (
+  tttIdentifier: string,
+  userIdentifier: string,
+  updateFn: (input: GoogleSpreadsheetRow) => GoogleSpreadsheetRow,
+) => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+
+  const row = rows.find(
+    (item) =>
+      dbToDone(item).userIdentifier === userIdentifier.toString().toLowerCase() &&
+      dbToDone(item).tttIdentifier === tttIdentifier.toString().toLowerCase(),
+  )
+  await updateFn(row).save()
+}
+
 export const getRowsByUserIdentifier = async (userIdentifier: string) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()

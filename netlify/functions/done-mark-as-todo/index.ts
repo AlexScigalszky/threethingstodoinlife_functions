@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { updateById } from '../../../src/database/done'
+import { updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
 // eslint-disable-next-line n/no-missing-import
 import { ThingsOrder } from '../../../src/enums/things_order'
 // eslint-disable-next-line n/no-missing-import
@@ -14,7 +14,7 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     const data = JSON.parse(event.body)
 
-    await updateById(data.identifier, (item) => {
+    await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
       switch (data.order) {
         case ThingsOrder.first:
           // eslint-disable-next-line no-param-reassign
