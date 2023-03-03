@@ -16,9 +16,9 @@ const dbToDone = (item: GoogleSpreadsheetRow): Done => ({
   identifier: item.identifier,
   userIdentifier: item.userIdentifier,
   tttIdentifier: item.tttIdentifier,
-  doneFirst: item.doneFirst,
-  doneSecond: item.doneSecond,
-  doneThird: item.doneThird,
+  doneFirst: item.doneFirst === 'TRUE' ? true : item.doneFirst === 'FALSE' ? false : null,
+  doneSecond: item.doneSecond === 'TRUE' ? true : item.doneSecond === 'FALSE' ? false : null,
+  doneThird: item.doneThird === 'TRUE' ? true : item.doneThird === 'FALSE' ? false : null,
 })
 
 export const getRows = async (): Promise<Done[]> => {

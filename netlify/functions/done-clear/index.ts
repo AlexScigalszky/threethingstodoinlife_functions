@@ -15,7 +15,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     const data = JSON.parse(event.body)
 
     const exists = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
-    // eslint-disable-next-line unicorn/prefer-ternary, unicorn/explicit-length-check
+    // eslint-disable-next-line unicorn/prefer-ternary
     if (exists.length === 0) {
       await addRow({
         identifier: null,
