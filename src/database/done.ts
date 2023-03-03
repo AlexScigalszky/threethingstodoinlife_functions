@@ -16,8 +16,11 @@ const dbToDone = (item: GoogleSpreadsheetRow): Done => ({
   identifier: item.identifier,
   userIdentifier: item.userIdentifier,
   tttIdentifier: item.tttIdentifier,
+  // eslint-disable-next-line unicorn/no-nested-ternary
   doneFirst: item.doneFirst === 'TRUE' ? true : item.doneFirst === 'FALSE' ? false : null,
+  // eslint-disable-next-line unicorn/no-nested-ternary
   doneSecond: item.doneSecond === 'TRUE' ? true : item.doneSecond === 'FALSE' ? false : null,
+  // eslint-disable-next-line unicorn/no-nested-ternary
   doneThird: item.doneThird === 'TRUE' ? true : item.doneThird === 'FALSE' ? false : null,
 })
 
