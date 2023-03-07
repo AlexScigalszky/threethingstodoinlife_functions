@@ -1,5 +1,4 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
-// eslint-disable-next-line n/no-missing-import
 import axios from 'axios'
 
 // eslint-disable-next-line n/no-missing-import
