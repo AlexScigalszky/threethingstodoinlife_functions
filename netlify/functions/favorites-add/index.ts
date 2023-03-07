@@ -18,7 +18,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       return item
     })
 
-    await axios.post('/.netlify/functions/vote-up', {
+    await axios.post('https://threethingstodoinlife-functions.netlify.app/.netlify/functions/vote-up', {
       identifier: data.identifier,
       userIdentifier: data.userIdentifier,
     })
