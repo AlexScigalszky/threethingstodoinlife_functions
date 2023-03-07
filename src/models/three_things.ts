@@ -7,4 +7,5 @@ export interface ThreeThings extends GoogleSpreadsheetValue {
   second: string
   third: string
   favorites: number
+  date: string
 }

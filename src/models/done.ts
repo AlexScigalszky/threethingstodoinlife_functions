@@ -8,4 +8,5 @@ export interface Done extends GoogleSpreadsheetValue {
   doneFirst: boolean | ''
   doneSecond: boolean | ''
   doneThird: boolean | ''
+  date: string
 }

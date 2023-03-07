@@ -22,6 +22,7 @@ const dbToDone = (item: GoogleSpreadsheetRow): Done => ({
   doneSecond: item.doneSecond === 'TRUE' ? true : item.doneSecond === 'FALSE' ? false : null,
   // eslint-disable-next-line unicorn/no-nested-ternary
   doneThird: item.doneThird === 'TRUE' ? true : item.doneThird === 'FALSE' ? false : null,
+  date: item.date,
 })
 
 export const getRows = async (): Promise<Done[]> => {
@@ -33,6 +34,7 @@ export const getRows = async (): Promise<Done[]> => {
 export const addRow = async (data: Done) => {
   const dataWithId = {
     ...data,
+    date: new Date().toUTCString(),
     identifier: generateUniqueId(),
   }
   const sheet = await getDb()

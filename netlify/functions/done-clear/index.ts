@@ -24,6 +24,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         doneFirst: null,
         doneSecond: null,
         doneThird: null,
+        date: null,
       })
     } else {
       await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {

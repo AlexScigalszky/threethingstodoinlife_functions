@@ -19,6 +19,7 @@ const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
   third: item.third,
   // eslint-disable-next-line n/no-unsupported-features/es-syntax
   favorites: item.favorites ?? 0,
+  date: item.date
 })
 
 export const getRows = async (): Promise<ThreeThings[]> => {

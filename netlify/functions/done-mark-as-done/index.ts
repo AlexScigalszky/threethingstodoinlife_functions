@@ -24,6 +24,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         doneFirst: data.order === ThingsOrder.first ? true : null,
         doneSecond: data.order === ThingsOrder.second ? true : null,
         doneThird: data.order === ThingsOrder.third ? true : null,
+        date: data.date,
       })
     } else {
       await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
