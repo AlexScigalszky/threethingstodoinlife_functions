@@ -1,4 +1,6 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
+// eslint-disable-next-line n/no-missing-import
+import axios from 'axios'
 
 // eslint-disable-next-line n/no-missing-import
 import { updateById } from '../../../src/database/ttt'
@@ -15,6 +17,11 @@ const handler: Handler = async (event: HandlerEvent) => {
       // eslint-disable-next-line no-param-reassign
       item.favorites = Number(item.favorites) - 1
       return item
+    })
+
+    axios.post('/.netlify/functions/vote-down', {
+      identifier: data.identifier,
+      userIdentifier: data.userIdentifier,
     })
 
     return {
