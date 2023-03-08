@@ -31,8 +31,8 @@ const handler: Handler = async (event: HandlerEvent) => {
       await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item, doneItem) => {
         info = {
           done: doneItem,
-          isDoneFirst: doneItem.doneFirst === true
-        };
+          isDoneFirst: doneItem.doneFirst === true,
+        }
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
