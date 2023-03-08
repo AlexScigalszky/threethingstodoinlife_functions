@@ -79,7 +79,7 @@ export const updateByTttIdentifierUserIdentifier = async (
   if (!row) {
     throw new Error('row not found')
   }
-  const doneItem = dbToDone(row);
+  const doneItem = dbToDone(row)
   await updateFn(row, doneItem).save()
 }
 
