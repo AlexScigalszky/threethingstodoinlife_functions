@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { addRow, dbToDone, getRowsByUserAndTttIdentifier, updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
+import { addRow, getRowsByUserAndTttIdentifier, updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
 // eslint-disable-next-line n/no-missing-import
 import { ThingsOrder } from '../../../src/enums/things_order'
 // eslint-disable-next-line n/no-missing-import
