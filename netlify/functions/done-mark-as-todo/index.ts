@@ -28,7 +28,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       })
     } else {
       await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
-        throw new Error(JSON.stringify(item));
+        throw new Error(JSON.stringify(item))
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
