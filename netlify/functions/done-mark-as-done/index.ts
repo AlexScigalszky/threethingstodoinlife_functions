@@ -32,7 +32,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         info = {
           done: doneItem,
           isDoneFirst: doneItem.doneFirst === true,
-          itemfirst: 'saraca'
+          itemfirst: 'saraca',
         }
         switch (data.order) {
           case ThingsOrder.first:
