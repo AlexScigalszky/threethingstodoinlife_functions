@@ -31,7 +31,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
-            item.doneFirst = item.doneFirst === 'TRUE' ? null : true
+            item.doneFirst = item.doneFirst === 'FALSE' ? true : null
             break
           case ThingsOrder.second:
             // eslint-disable-next-line no-param-reassign
@@ -48,10 +48,12 @@ const handler: Handler = async (event: HandlerEvent) => {
       })
     }
 
+    const exists2 = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ message: `row added` }),
+      body: JSON.stringify({ message: exists2 }),
     }
   } catch (error) {
     return {
