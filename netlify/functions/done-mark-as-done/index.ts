@@ -33,15 +33,15 @@ const handler: Handler = async (event: HandlerEvent) => {
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
-            item.doneFirst = doneItem.first === true ? null : true
+            item.doneFirst = doneItem.doneFirst === true ? null : true
             break
           case ThingsOrder.second:
             // eslint-disable-next-line no-param-reassign
-            item.doneSecond = doneItem.second === true ? null : true
+            item.doneSecond = doneItem.doneSecond === true ? null : true
             break
           case ThingsOrder.third:
             // eslint-disable-next-line no-param-reassign
-            item.doneThird = doneItem.third === true ? null : true
+            item.doneThird = doneItem.doneThird === true ? null : true
             break
           default:
             break
@@ -49,8 +49,6 @@ const handler: Handler = async (event: HandlerEvent) => {
         return item
       })
     }
-
-    // const exists2 = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
 
     return {
       statusCode: 200,
