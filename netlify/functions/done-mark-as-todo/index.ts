@@ -21,9 +21,9 @@ const handler: Handler = async (event: HandlerEvent) => {
         identifier: null,
         userIdentifier: data.userIdentifier,
         tttIdentifier: data.identifier,
-        doneFirst: data.order === ThingsOrder.first ? false : null,
-        doneSecond: data.order === ThingsOrder.second ? false : null,
-        doneThird: data.order === ThingsOrder.third ? false : null,
+        doneFirst: data.order === ThingsOrder.first ? false : '',
+        doneSecond: data.order === ThingsOrder.second ? false : '',
+        doneThird: data.order === ThingsOrder.third ? false : '',
         date: null,
       })
     } else {
@@ -31,15 +31,15 @@ const handler: Handler = async (event: HandlerEvent) => {
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
-            item.doneFirst = doneItem.doneFirst === false ? null : false
+            item.doneFirst = doneItem.doneFirst === false ? '' : false
             break
           case ThingsOrder.second:
             // eslint-disable-next-line no-param-reassign
-            item.doneSecond = doneItem.doneSecond === false ? null : false
+            item.doneSecond = doneItem.doneSecond === false ? '' : false
             break
           case ThingsOrder.third:
             // eslint-disable-next-line no-param-reassign
-            item.doneThird = doneItem.doneThird === false ? null : false
+            item.doneThird = doneItem.doneThird === false ? '' : false
             break
           default:
             break
