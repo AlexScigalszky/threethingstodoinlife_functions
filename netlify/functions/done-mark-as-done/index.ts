@@ -31,15 +31,15 @@ const handler: Handler = async (event: HandlerEvent) => {
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
-            item.doneFirst = true
+            item.doneFirst = item.doneFirst === true ? null : true
             break
           case ThingsOrder.second:
             // eslint-disable-next-line no-param-reassign
-            item.doneSecond = true
+            item.doneSecond = item.doneSecond === true ? null : true
             break
           case ThingsOrder.third:
             // eslint-disable-next-line no-param-reassign
-            item.doneThird = true
+            item.doneThird = item.doneThird === true ? null : true
             break
           default:
             break
