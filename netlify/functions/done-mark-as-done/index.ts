@@ -50,7 +50,7 @@ const handler: Handler = async (event: HandlerEvent) => {
           default:
             break
         }
-         
+
         info.itemfirst = item.doneFirst
         return item
       })
