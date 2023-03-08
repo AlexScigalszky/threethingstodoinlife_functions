@@ -1,6 +1,8 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
+import { updateById } from '../../../src/database/ttt'
+// eslint-disable-next-line n/no-missing-import
 import { addRow, getRowsByUserAndTttIdentifier, updateByTttIdentifierUserIdentifier } from '../../../src/database/vote'
 // eslint-disable-next-line n/no-missing-import
 import { allowOptions, headers } from '../../../src/utils/headers'
@@ -11,6 +13,12 @@ const handler: Handler = async (event: HandlerEvent) => {
     if (result) return result
 
     const data = JSON.parse(event.body)
+
+    await updateById(data.identifier, (item) => {
+      // eslint-disable-next-line no-param-reassign
+      item.favorites = 1 + Number(item.favorites)
+      return item
+    })
 
     const exists = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
     // eslint-disable-next-line unicorn/prefer-ternary

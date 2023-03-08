@@ -1,32 +1,15 @@
-import { Handler, HandlerEvent } from '@netlify/functions'
-import axios from 'axios'
+import { Handler } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { updateById } from '../../../src/database/ttt'
-// eslint-disable-next-line n/no-missing-import
-import { allowOptions, headers } from '../../../src/utils/headers'
+import { headers } from '../../../src/utils/headers'
 
-const handler: Handler = async (event: HandlerEvent) => {
+const handler: Handler = async () => {
   try {
-    const result = allowOptions(event)
-    if (result) return result
-
-    const data = JSON.parse(event.body)
-    await updateById(data.identifier, (item) => {
-      // eslint-disable-next-line no-param-reassign
-      item.favorites = Number(item.favorites) - 1
-      return item
-    })
-
-    await axios.post('https://threethingstodoinlife-functions.netlify.app/.netlify/functions/vote-down', {
-      identifier: data.identifier,
-      userIdentifier: data.userIdentifier,
-    })
-
+    await Promise.resolve(2)
     return {
-      statusCode: 200,
+      statusCode: 410,
       headers,
-      body: JSON.stringify({ message: `favorite removed` }),
+      body: JSON.stringify({ message: `Obsolete` }),
     }
   } catch (error) {
     return {

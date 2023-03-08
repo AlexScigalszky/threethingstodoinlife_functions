@@ -5,6 +5,6 @@ export interface Vote extends GoogleSpreadsheetValue {
   identifier: string
   userIdentifier: string
   tttIdentifier: string
-  value: -1 | 1
+  value: -1 | 1 | 0
   date: string
 }
