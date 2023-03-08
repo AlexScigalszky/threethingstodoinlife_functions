@@ -32,6 +32,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         info = {
           done: doneItem,
           isDoneFirst: doneItem.doneFirst === true,
+          itemfirst: 'saraca'
         }
         switch (data.order) {
           case ThingsOrder.first:
@@ -49,6 +50,8 @@ const handler: Handler = async (event: HandlerEvent) => {
           default:
             break
         }
+        // eslint-disable-next-line no-param-reassign
+        info.itemfirst = item.doneFirst
         return item
       })
     }
