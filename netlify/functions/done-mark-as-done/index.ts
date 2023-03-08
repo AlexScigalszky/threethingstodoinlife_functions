@@ -14,6 +14,7 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     const data = JSON.parse(event.body)
 
+    let info
     const exists = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
     // eslint-disable-next-line unicorn/prefer-ternary
     if (exists.length === 0) {
@@ -28,6 +29,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       })
     } else {
       await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item, doneItem) => {
+        info = doneItem
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
@@ -48,12 +50,12 @@ const handler: Handler = async (event: HandlerEvent) => {
       })
     }
 
-    const exists2 = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
+    // const exists2 = await getRowsByUserAndTttIdentifier(data.userIdentifier, data.identifier)
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ message: exists2 }),
+      body: JSON.stringify({ message: info }),
     }
   } catch (error) {
     return {
