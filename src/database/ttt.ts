@@ -18,7 +18,7 @@ const dbToThreeThings = (item: GoogleSpreadsheetRow): ThreeThings => ({
   second: item.second,
   third: item.third,
   // eslint-disable-next-line n/no-unsupported-features/es-syntax
-  favorites: item.favorites ?? 0,
+  votes: item.votes ?? 0,
   date: item.date,
 })
 
@@ -32,7 +32,7 @@ export const addRow = async (data: ThreeThings) => {
   const dataWithId = {
     identifier: generateUniqueId(),
     date: new Date().toUTCString(),
-    favorites: data.favorites ? data.favorites : 0,
+    votes: data.votes ? data.votes : 0,
     ...data,
   }
   const sheet = await getDb()
