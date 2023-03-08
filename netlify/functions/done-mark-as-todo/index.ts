@@ -1,7 +1,7 @@
 import { Handler, HandlerEvent } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { addRow, getRowsByUserAndTttIdentifier, updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
+import { addRow, dbToDone, getRowsByUserAndTttIdentifier, updateByTttIdentifierUserIdentifier } from '../../../src/database/done'
 // eslint-disable-next-line n/no-missing-import
 import { ThingsOrder } from '../../../src/enums/things_order'
 // eslint-disable-next-line n/no-missing-import
@@ -27,20 +27,19 @@ const handler: Handler = async (event: HandlerEvent) => {
         date: null,
       })
     } else {
-      await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
-        throw new Error(JSON.stringify(item))
+      await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item, doneItem) => {
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
-            item.doneFirst = item.doneFirst === 'FALSE' ? null : false
+            item.doneFirst = doneItem.first === false ? null : false
             break
           case ThingsOrder.second:
             // eslint-disable-next-line no-param-reassign
-            item.doneSecond = item.doneSecond === 'FALSE' ? null : false
+            item.doneSecond = doneItem.second === false ? null : false
             break
           case ThingsOrder.third:
             // eslint-disable-next-line no-param-reassign
-            item.doneThird = item.doneThird === 'FALSE' ? null : false
+            item.doneThird = doneItem.third === false ? null : false
             break
           default:
             break

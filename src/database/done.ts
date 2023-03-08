@@ -12,7 +12,7 @@ import { getTable } from './base'
 
 const getDb = () => getTable(1)
 
-const dbToDone = (item: GoogleSpreadsheetRow): Done => ({
+export const dbToDone = (item: GoogleSpreadsheetRow): Done => ({
   identifier: item.identifier,
   userIdentifier: item.userIdentifier,
   tttIdentifier: item.tttIdentifier,
@@ -66,7 +66,7 @@ export const updateById = async (id: string, updateFn: (input: GoogleSpreadsheet
 export const updateByTttIdentifierUserIdentifier = async (
   tttIdentifier: string,
   userIdentifier: string,
-  updateFn: (input: GoogleSpreadsheetRow) => GoogleSpreadsheetRow,
+  updateFn: (input: GoogleSpreadsheetRow, doneItem: Done) => GoogleSpreadsheetRow,
 ) => {
   const sheet = await getDb()
   const rows = await sheet.getRows()
@@ -79,7 +79,8 @@ export const updateByTttIdentifierUserIdentifier = async (
   if (!row) {
     throw new Error('row not found')
   }
-  await updateFn(row).save()
+  const doneItem = dbToDone(row);
+  await updateFn(row, doneItem).save()
 }
 
 export const getRowsByUserIdentifier = async (userIdentifier: string) => {

@@ -27,19 +27,19 @@ const handler: Handler = async (event: HandlerEvent) => {
         date: data.date,
       })
     } else {
-      await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item) => {
+      await updateByTttIdentifierUserIdentifier(data.identifier, data.userIdentifier, (item, doneItem) => {
         switch (data.order) {
           case ThingsOrder.first:
             // eslint-disable-next-line no-param-reassign
-            item.doneFirst = item.doneFirst === 'TRUE' ? null : true
+            item.doneFirst = doneItem.first === true ? null : true
             break
           case ThingsOrder.second:
             // eslint-disable-next-line no-param-reassign
-            item.doneSecond = item.doneSecond === 'TRUE' ? null : true
+            item.doneSecond = doneItem.second === true ? null : true
             break
           case ThingsOrder.third:
             // eslint-disable-next-line no-param-reassign
-            item.doneThird = item.doneThird === 'TRUE' ? null : true
+            item.doneThird = doneItem.third === true ? null : true
             break
           default:
             break
