@@ -50,7 +50,7 @@ const handler: Handler = async (event: HandlerEvent) => {
           default:
             break
         }
-        // eslint-disable-next-line no-param-reassign
+         
         info.itemfirst = item.doneFirst
         return item
       })
