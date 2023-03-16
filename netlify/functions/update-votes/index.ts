@@ -1,11 +1,11 @@
 import { Handler, schedule } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { getRows as getVoteRows } from '../../../src/database/vote'
-// eslint-disable-next-line n/no-missing-import
 import { getRows as getTTTRows, updateById } from '../../../src/database/ttt'
+// eslint-disable-next-line n/no-missing-import
+import { getRows as getVoteRows } from '../../../src/database/vote'
 
-const myHandler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+const myHandler: Handler = async () => {
   const ttts = await getTTTRows()
   for (const ttt of ttts) {
     await updateById(ttt.identifier, (item) => {
