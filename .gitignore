@@ -33,3 +33,4 @@ yarn-error.log*
 .netlify
 
 threethingtodoin-1674076187499-b47bb27ed005.json
+.eslintcache
