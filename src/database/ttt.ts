@@ -66,7 +66,6 @@ export const setZeroVotes = async () => {
   const rows = await sheet.getRows()
 
   for (const row of rows) {
-    // eslint-disable-next-line no-param-reassign
     row.favorites = Number(0)
   }
 
