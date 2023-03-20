@@ -60,3 +60,15 @@ export const updateById = async (id: string, updateFn: (input: GoogleSpreadsheet
   }
   await updateFn(row).save()
 }
+
+export const setZeroVotes = async () => {
+  const sheet = await getDb()
+  const rows = await sheet.getRows()
+
+  for (const row of rows) {
+    // eslint-disable-next-line no-param-reassign
+    row.favorites = Number(0)
+  }
+
+  await sheet.saveUpdatedCells()
+}

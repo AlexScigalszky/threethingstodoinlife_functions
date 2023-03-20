@@ -1,25 +1,18 @@
 import { Handler, schedule } from '@netlify/functions'
 
 // eslint-disable-next-line n/no-missing-import
-import { getRows as getTTTRows, updateById } from '../../../src/database/ttt'
+import { setZeroVotes, updateById } from '../../../src/database/ttt'
 // eslint-disable-next-line n/no-missing-import
 import { getRows as getVoteRows } from '../../../src/database/vote'
 
 const myHandler: Handler = async () => {
-  const ttts = await getTTTRows()
-  for (const ttt of ttts) {
-    await updateById(ttt.identifier, (item) => {
-      // eslint-disable-next-line no-param-reassign
-      item.favorites = Number(0)
-      return item
-    })
-  }
+  await setZeroVotes()
 
   const votes = await getVoteRows()
   for (const vote of votes) {
     await updateById(vote.identifier, (item) => {
       // eslint-disable-next-line no-param-reassign
-      item.favorites = 1 + Number(item.favorites)
+      item.votes = Number(vote.value) + Number(item.votes)
       return item
     })
   }
@@ -28,6 +21,6 @@ const myHandler: Handler = async () => {
   }
 }
 
-const handler = schedule('@hourly', myHandler)
+const handler = schedule('@daily', myHandler)
 
 export { handler }
