@@ -9,7 +9,7 @@
     "dist/**/*.d.ts"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "",
     "prepare": "husky install node_modules/@netlify/eslint-config-node/.husky/",
     "prepack": "npm run build",
     "prepublishOnly": "npm ci && npm test",
