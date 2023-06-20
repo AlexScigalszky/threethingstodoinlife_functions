@@ -31,6 +31,6 @@ const myHandler: Handler = async () => {
   }
 }
 
-const handler = schedule('@daily', myHandler)
+const handler = myHandler; //schedule('@daily', myHandler)
 
 export { handler }
