@@ -33,4 +33,4 @@ const myHandler: Handler = async () => {
 
 const handler = myHandler; //schedule('@daily', myHandler)
 
-export { handler }
+//export { handler }
